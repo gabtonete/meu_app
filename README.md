@@ -1,6 +1,6 @@
 # meu_app
 
-Projeto Flutter Alura
+Projeto Flutter Alura v0.1
 
 ## Getting Started
 
