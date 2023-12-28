@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,83 +15,81 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Container(
-        color: Colors.white,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("Tarefas"),
+        ),
+        body: ListView(
           children: [
-            Stack(
-              alignment: AlignmentDirectional.center,
-              children: [
-                Container(
-                  color: Colors.red,
-                  width: 100,
-                  height: 100,
-                ),
-                Container(
-                  color: Colors.blue,
-                  width: 50,
-                  height: 50,
-                ),
-              ],
-            ),
-            Stack(
-              alignment: AlignmentDirectional.center,
-              children: [
-                Container(
-                  color: Colors.blue,
-                  width: 100,
-                  height: 100,
-                ),
-                Container(
-                  color: Colors.red,
-                  width: 50,
-                  height: 50,
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  color: Colors.cyan,
-                  height: 50,
-                  width: 50,
-                ),
-                Container(
-                  color: Colors.pinkAccent,
-                  height: 50,
-                  width: 50,
-                ),
-                Container(
-                  color: Colors.purple,
-                  height: 50,
-                  width: 50,
-                )
-              ],
-            ),
-            Container(
-              color: Colors.amber,
-              height: 30,
-              width: 300,
-              child: const Text(
-                'Diamante Bruto',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 28,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            ElevatedButton(
-                onPressed: () {
-                  print('Você apertou o botão');
-                },
-                child: Text('Botãozinho'))
+            Task('Aprender Flutter no café da manhã'),
+            Task('Andar de Bike'),
+            Task('Meditar'),
+            Task('Meditar'),
+            Task('Meditar'),
+            Task('Meditar'),
+            Task('Meditar'),
           ],
         ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => {print('test')},
+        ),
+      ),
+    );
+  }
+}
+
+class Task extends StatelessWidget {
+  final String nome;
+  const Task(this.nome, {Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    int nivel = 0;
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Stack(
+        children: [
+          Container(
+            color: Colors.blue,
+            height: 140,
+          ),
+          Column(
+            children: [
+              Container(
+                color: Colors.white,
+                height: 100,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      color: Colors.black26,
+                      width: 72,
+                      height: 100,
+                    ),
+                    Container(
+                      width: 200,
+                      child: Text(
+                        nome,
+                        style: TextStyle(fontSize: 24),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    ElevatedButton(
+                        onPressed: () {
+                          nivel++;
+                          print(nivel);
+                        },
+                        child: Icon(Icons.arrow_drop_up))
+                  ],
+                ),
+              ),
+              Text(
+                'Nivel: $nivel',
+                style: TextStyle(fontSize: 16, color: Colors.white),
+              )
+            ],
+          ),
+        ],
       ),
     );
   }
