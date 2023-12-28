@@ -1,6 +1,6 @@
 # meu_app
 
-A new Flutter project.
+Projeto Flutter Alura
 
 ## Getting Started
 
